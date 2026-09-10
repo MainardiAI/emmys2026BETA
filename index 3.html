@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emmy 2026 — Vencedores</title>
+  <style>
+    :root{--bg:#050506;--muted:#a9a9ae;--line:#29292e;--blue:#2997ff}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}
+    header{padding:34px 5vw 24px;max-width:1200px;margin:auto} .eyebrow{color:var(--blue);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.title{font-size:clamp(34px,6vw,68px);letter-spacing:-.055em;margin:10px 0 8px}.sub{color:var(--muted);font-size:17px;max-width:640px;line-height:1.45}
+    nav{display:flex;gap:9px;overflow:auto;padding:0 5vw 26px;max-width:1200px;margin:auto;scrollbar-width:none}nav button{white-space:nowrap;background:#1c1c1f;border:1px solid #333338;color:#ddd;border-radius:22px;padding:10px 17px;font-size:14px}nav button.active{background:#f5f5f7;color:#050506;border-color:#f5f5f7}
+    main{max-width:1200px;margin:auto;padding:0 5vw 50px}.section-title{font-size:25px;letter-spacing:-.03em;margin:18px 0 14px}.section-title span{color:#777;font-size:20px;margin-left:5px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:18px}.card{min-width:0}.poster{aspect-ratio:2/3;border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:flex-end;padding:16px;background:linear-gradient(145deg,#214a61,#101016 62%,#060609);box-shadow:0 8px 25px #0008;transition:.2s}.poster:hover{transform:translateY(-4px)}.poster:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,#000c)}.poster h3{position:relative;z-index:1;margin:0;font-size:24px;line-height:.95;letter-spacing:-.05em}.badge{position:absolute;z-index:2;top:11px;left:11px;background:#fff;color:#080808;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:800}.meta{padding:10px 3px}.name{font-size:17px;font-weight:650}.detail{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.35}.watch{display:inline-block;margin-top:9px;color:#fff;background:#147ce5;text-decoration:none;border-radius:18px;padding:7px 12px;font-size:12px;font-weight:650}.note{color:#777;font-size:13px;margin-top:28px;line-height:1.5}.empty{color:#777;padding:30px 0;display:none}
+    @media(max-width:520px){header{padding-top:26px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.poster{border-radius:13px}.poster h3{font-size:21px}.section-title{font-size:22px}}
+  </style>
+</head>
+<body>
+  <header><div class="eyebrow">78th Primetime Emmy Awards</div><h1 class="title">Vencedores para assistir</h1><p class="sub">Uma seleção dos vencedores já anunciados nos Creative Arts Emmys 2026 — reunidos em um só lugar.</p></header>
+  <nav id="filters"><button class="active" data-filter="all">Todos</button><button data-filter="Drama">Drama</button><button data-filter="Comédia">Comédia</button><button data-filter="Minissérie">Minissérie</button><button data-filter="Técnico">Técnico</button></nav>
+  <main><h2 class="section-title">Creative Arts Emmys <span>Night 2</span></h2><div class="grid" id="grid"></div><p class="note">Os links de assistência serão configurados para abrir o aplicativo correspondente quando disponível. A disponibilidade pode variar por país e assinatura.</p></main>
+  <script>
+    const shows=[
+      {title:'Spider-Noir',type:'Drama',wins:'5 Emmys',platform:'Prime Video',color:'linear-gradient(145deg,#681d2b,#08090d 68%)',url:'https://app.primevideo.com/'},
+      {title:'DTF St. Louis',type:'Minissérie',wins:'Creative Arts winner',platform:'HBO Max',color:'linear-gradient(145deg,#d26b48,#171016 65%)',url:'https://play.max.com/'},
+      {title:'Hacks',type:'Comédia',wins:'Creative Arts winner',platform:'HBO Max',color:'linear-gradient(145deg,#c99442,#21110c 65%)',url:'https://play.max.com/'},
+      {title:'The Pitt',type:'Drama',wins:'Creative Arts winner',platform:'HBO Max',color:'linear-gradient(145deg,#2c6d81,#091016 65%)',url:'https://play.max.com/'},
+      {title:'The Studio',type:'Comédia',wins:'Creative Arts winner',platform:'Apple TV+',color:'linear-gradient(145deg,#74604a,#111114 65%)',url:'https://tv.apple.com/'},
+      {title:'Severance',type:'Drama',wins:'Creative Arts winner',platform:'Apple TV+',color:'linear-gradient(145deg,#385d6d,#080b12 65%)',url:'https://tv.apple.com/'}
+    ];
+    const grid=document.querySelector('#grid');
+    function render(filter='all'){grid.innerHTML='';shows.filter(s=>filter==='all'||s.type===filter).forEach(s=>{const el=document.createElement('article');el.className='card';el.dataset.type=s.type;el.innerHTML=`<a href="${s.url}" target="_blank" rel="noopener" aria-label="Assistir ${s.title}"><div class="poster" style="background:${s.color}"><span class="badge">EMMY WINNER</span><h3>${s.title}</h3></div></a><div class="meta"><div class="name">${s.title}</div><div class="detail">${s.wins} · ${s.platform}</div><a class="watch" href="${s.url}" target="_blank" rel="noopener">Abrir no app</a></div>`;grid.appendChild(el)})}
+    document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)});render();
+  </script>
+</body></html>
